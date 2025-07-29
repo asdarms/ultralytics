@@ -702,7 +702,7 @@ def plot_mc_curve(
     """
     import matplotlib.pyplot as plt  # scope for faster 'import ultralytics'
 
-    fig, ax = plt.subplots(1, 1, figsize=(9, 6), tight_layout=True)
+    fig, ax = plt.subplots(1, 1, figsize=(6, 6), tight_layout=True)
 
     if 0 < len(names) < 21:  # display per-class legend if < 21 classes
         for i, y in enumerate(py):
@@ -711,13 +711,15 @@ def plot_mc_curve(
         ax.plot(px, py.T, linewidth=1, color="grey")  # plot(confidence, metric)
 
     y = smooth(py.mean(0), 0.1)
+    plt.rcParams.update({'font.size': 14}) #NEW CODE
     ax.plot(px, y, linewidth=3, color="blue", label=f"all classes {y.max():.2f} at {px[y.argmax()]:.3f}")
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
     ax.set_xlim(0, 1)
     ax.set_ylim(0, 1)
-    ax.legend(bbox_to_anchor=(1.04, 1), loc="upper left")
+    ax.legend(bbox_to_anchor=(0.04, 0.04), loc="lower left") #MODIFIED CODE, originally 1.04, 1, upper left
     ax.set_title(f"{ylabel}-Confidence Curve")
+    ax.grid() #NEW CODE
     fig.savefig(save_dir, dpi=250)
     plt.close(fig)
     if on_plot:

@@ -1,0 +1,1 @@
+yolo val model=data/9e.pt data=data/oldaug/data.yaml batch=16 name=val-9e-oldaug
